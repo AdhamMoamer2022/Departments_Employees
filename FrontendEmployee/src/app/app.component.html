@@ -1,0 +1,61 @@
+<div class="header">
+  <h1>List of Employees</h1>
+  <div class="addEmployeeButton">
+    <button mat-button color="primary" style="margin-left: 8rem" (click)="AddNewEmployee()">
+      Add Employee
+    </button>
+  </div>
+</div>
+<div class="filter">
+  <mat-form-field style="width: 75%" appearance="fill">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="search" #input />
+  </mat-form-field>
+</div>
+<div class="mat-elevation-z8" style="margin: auto; width: 80%">
+  <table mat-table [dataSource]="dataSource" style="width: 100%">
+    <ng-container matColumnDef="FullName">
+      <th mat-header-cell *matHeaderCellDef>Full Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.fullName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Department">
+      <th mat-header-cell *matHeaderCellDef>Department</th>
+      <td mat-cell *matCellDef="let element">{{ element.departmentName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Salary">
+      <th mat-header-cell *matHeaderCellDef>Salary</th>
+      <td mat-cell *matCellDef="let element">{{ element.salary }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="HireDate">
+      <th mat-header-cell *matHeaderCellDef>HireDate</th>
+      <td mat-cell *matCellDef="let element">{{ element.hireDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button color="primary" (click)="editEmployee(element)">Edit</button>
+        <button mat-button color="warn" (click)="DeleteEmployee(element)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No data matching the filter "{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+  <mat-paginator
+    [length]="200"
+    [pageSize]="20"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+  >
+  </mat-paginator>
+</div>

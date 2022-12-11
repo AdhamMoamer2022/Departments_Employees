@@ -1,0 +1,11 @@
+.addEmployeeButton {
+  display: flex;
+}
+.header {
+  width: 80%;
+  margin:auto;
+  margin-top:5rem;
+  display: flex;
+  justify-content:space-between;
+}
+

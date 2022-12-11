@@ -1,0 +1,55 @@
+<h2 matDialogTitle>{{ action }} Employee</h2>
+<mat-dialog-content>
+  <form [formGroup]="formEmployee">
+    <mat-grid-list cols="1" rowHeight="80px">
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Full Name</mat-label>
+          <input matInput formControlName="fullName" autocomplete="false" />
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Department</mat-label>
+          <mat-select formControlName="idDepartment">
+            <mat-option
+              *ngFor="let dep of departmentList"
+              [value]="dep.idDepartment"
+              >{{ dep.name }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Salary</mat-label>
+          <input matInput formControlName="salary" />
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Hire Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dp"
+            placeholder="Pick HireDate"
+            formControlName="hireDate"
+          />
+          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+          <mat-datepicker #dp></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close color="warn">Cancel</button>
+  <button
+    mat-button
+    [disabled]="formEmployee.invalid"
+    (click)="addEditEmployee()"
+    color="primary"
+  >
+    {{ actionButton }}
+  </button>
+</mat-dialog-actions>
